@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
         trim:true,
         unique:[true,'user already exists with the provided email.']
     },
+    password:{
+        type:String,
+        required:[true,'password is required'],
+        minlength:6
+    },
     phone:{
         type:String,
         trim:true,
