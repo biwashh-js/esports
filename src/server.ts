@@ -1,0 +1,21 @@
+import 'dotenv/config'
+import express from "express";
+import { connectdb } from './config/db.config';
+
+const PORT = process.env.PORT ?? 8080
+const DB_URI = process.env.DB_URI ?? ""
+const app = express()
+console.log('DB_URI:', DB_URI);
+
+
+connectdb(DB_URI)
+
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        message:'server is up and running'
+    })
+})
+
+app.listen(PORT,()=>{
+    console.log(`sever is running at http://localhost:${PORT}`)
+})
