@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { User } from "../models/user-model";
 import { comparePassword, hashPassword } from "../utils/bcrypt.utils";
 import customError from "../middlewares/error-handler.middleware";
+import { asyncHandler } from "../utils/async-handler.utils";
 
-export const register = async(req:Request,res:Response,next:NextFunction)=>{
-    try{
+export const register = asyncHandler(async(req:Request,res:Response,next:NextFunction)=>{
     const{firstName,lastName,email,phone,gender,password} = req.body
 
     const user = new User({
@@ -25,14 +25,11 @@ export const register = async(req:Request,res:Response,next:NextFunction)=>{
         status:'success',
         data:user
     })
-    }catch(error){
-    next(error)
-    }
 }
+)
 
-
-export const login = async(req:Request,res:Response,next:NextFunction)=>{
-    try{
+export const login = asyncHandler(async(req:Request,res:Response,next:NextFunction)=>{
+    
     const {email, password} = req.body
     if(!email){
         throw new customError('email is required',400)
@@ -62,7 +59,5 @@ export const login = async(req:Request,res:Response,next:NextFunction)=>{
             
             }
         })
-    }catch(error){
-        next(error)
-    }
 }
+)
