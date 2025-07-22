@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from "express";
 import { connectdb } from './config/db.config';
 import authRoutes from './routes/auth.routes'
+import userRoutes from './routes/user.routes'
 
 const PORT = process.env.PORT ?? 8080
 const DB_URI = process.env.DB_URI ?? ""
@@ -23,7 +24,7 @@ app.get('/',(req,res)=>{
 
 //routes
 app.use('/api/auth',authRoutes)
-
+app.use('/api/user',userRoutes)
 
 app.listen(PORT,()=>{
     console.log(`sever is running at http://localhost:${PORT}`)
