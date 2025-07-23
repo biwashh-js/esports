@@ -37,3 +37,23 @@ const {id} = req.params
 
 })
 
+
+//delete user
+
+export const deleteUser = asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
+        const {id} = req.params
+         const deleteUser = await User.findByIdAndDelete(id)
+
+      if(!deleteUser){
+            throw new customError("user not found",404);
+        }
+    
+    
+    res.status(200).json({
+        message:`user deleted sucessfully`,
+        success:true,
+        status:'success',
+        data:null
+    })
+
+})
