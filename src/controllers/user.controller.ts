@@ -57,3 +57,25 @@ export const deleteUser = asyncHandler(async(req:Request,res:Response,next:NextF
     })
 
 })
+
+
+
+
+//update profile
+export const updateProfile =asyncHandler(  async(req:Request, res:Response, next:NextFunction) =>{
+      const {firstName,lastName,phone,gender} = req.body
+      const {id} = req.params
+      const user = await User.findById(id)
+
+      if(!user){
+            throw new customError("user not found",404);
+        }
+    
+    if(firstName) user.firstName = firstName
+    if(lastName) user.lastName = lastName
+    if(phone) user.phone = phone
+    if(gender) user.gender = gender
+    
+    await user.save()
+
+    })
