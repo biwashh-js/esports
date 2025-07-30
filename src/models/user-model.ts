@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { Gender, Role } from '../types/enum.types'
-import { ok } from 'assert'
+
 const UserSchema = new mongoose.Schema({
     firstName:{
         type:String,
@@ -40,3 +40,5 @@ const UserSchema = new mongoose.Schema({
 })
 
 export const User = mongoose.model('user',UserSchema)
+
+export default User
